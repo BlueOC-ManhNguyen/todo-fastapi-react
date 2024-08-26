@@ -1,9 +1,12 @@
-from sqlalchemy import Column, String, Boolean, DateTime
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
-from app.models.model_base import BareBaseModel
-from app.helpers.enums import UserRole
+from app.models.model_base import Base
 
 
-class User(BareBaseModel):
-    name = Column(String, index=True)
-    role = Column(String, default=UserRole.USER)
+class User(Base):
+    __tablename__  = "users"
+    name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True)
+    password = Column(String(255), nullable=False)
+    categories = relationship("Category")

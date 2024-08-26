@@ -9,7 +9,7 @@ cp .env.example .env
 Add PYTHONPATH
 
 ```
-echo PYTHONPATH="$(pwd)" >> .env
+export PYTHONPATH=`pwd`
 ```
 
 

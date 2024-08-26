@@ -5,11 +5,11 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app.api.api_router import router
 from app.models import Base
-# from app.db.base import engine
+from app.db.base import engine
 from app.core.config import settings
 from app.helpers.exception_handler import CustomException, http_exception_handler
 
-# Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 
 def get_application() -> FastAPI:
@@ -21,7 +21,7 @@ def get_application() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    # application.add_middleware(DBSessionMiddleware, db_url=settings.DATABASE_URL)
+    application.add_middleware(DBSessionMiddleware, db_url=settings.DATABASE_URI)
     application.include_router(router, prefix=settings.API_PREFIX)
     application.add_exception_handler(CustomException, http_exception_handler)
 
@@ -29,5 +29,5 @@ def get_application() -> FastAPI:
 
 
 app = get_application()
-if __name__ == '__main__':
+if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

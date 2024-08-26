@@ -5,6 +5,9 @@ from sqlalchemy import pool
 from app.models import Base
 
 from alembic import context
+from app.core.config import settings
+
+DATABASE_URI = str(settings.DATABASE_URI)
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

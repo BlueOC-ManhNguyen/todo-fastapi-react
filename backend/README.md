@@ -1,5 +1,12 @@
 ## Development setup
 
+Virtualenv
+
+```
+python3 -m venv venv
+pip install -r requirements.txt
+```
+
 Config .env
 
 ```
@@ -16,7 +23,6 @@ export PYTHONPATH=`pwd`
 [Install pre-commit](https://pre-commit.com/)
 
 ```
-pip install pre-commit
 pre-commit install
 ```
 

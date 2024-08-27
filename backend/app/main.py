@@ -8,6 +8,7 @@ from app.models import Base
 from app.db.base import engine
 from app.core.config import settings
 from app.helpers.exception_handler import CustomException, http_exception_handler
+from app.middleware.verify_token_middleware import verify_token_middleware
 
 Base.metadata.create_all(bind=engine)
 
@@ -22,6 +23,7 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
     application.add_middleware(DBSessionMiddleware, db_url=settings.DATABASE_URI)
+    application.middleware("http")(verify_token_middleware)
     application.include_router(router, prefix=settings.API_PREFIX)
     application.add_exception_handler(CustomException, http_exception_handler)
 

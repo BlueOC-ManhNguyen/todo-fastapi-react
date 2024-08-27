@@ -1,10 +1,11 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from app.schemas.sche_base import ResponseSchemaBase
 
 router = APIRouter()
 
 
-@router.get("", response_model=ResponseSchemaBase)
-async def get():
-    return {"message": "Health check success"}
+@router.get("")
+async def get(request: Request):
+    user = request.state.user
+    return {"message": f"Hello, {user.name}!"}

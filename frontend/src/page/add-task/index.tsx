@@ -1,8 +1,8 @@
 import React from "react";
 
-export default function AddTask() { 
+export default function AddTask() {
     return (
-    <p>Add Task</p>
+    <p>Add Category</p>
 
     )
 }

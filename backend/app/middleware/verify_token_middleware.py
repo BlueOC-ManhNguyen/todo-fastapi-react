@@ -16,6 +16,7 @@ async def verify_token_middleware(request: Request, call_next):
 
     token = request.headers.get("Authorization")
     if not token:
+        request.state.user = None
         return await call_next(request)
 
     # Remove the "Bearer " prefix
@@ -37,6 +38,7 @@ async def verify_token_middleware(request: Request, call_next):
         request.state.user = user
 
     except JWTError:
+        request.state.user = None
         return await call_next(request)
 
     return await call_next(request)

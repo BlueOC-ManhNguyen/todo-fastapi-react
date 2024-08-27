@@ -13,3 +13,7 @@ def get_db() -> Generator:
         yield db
     finally:
         db.close()
+
+
+def get_session():
+    return SessionLocal()
